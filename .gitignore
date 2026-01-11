@@ -2,3 +2,12 @@ venv/
 winvenv/
 source/
 .DS_Store
+test.py
+dist
+export
+*rusmark_files
+build
+export_path.txt
+sheet_list.txt
+__pycache__
+

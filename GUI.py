@@ -34,30 +34,30 @@ def go_process():
     except Exception as err:
         print(err)
         messagebox.showerror("Title", err)
+    messagebox.showinfo('Title', 'Процесс завершен')
     # os.mkdir('export/dir')
 
 if __name__ == "__main__":
     root = Tk()
     root.title("Lib Search")
-    root.geometry("400x400")
+    root.geometry("500x400")
     root.grid_rowconfigure(index=0, weight=1)
     root.grid_columnconfigure(index=0, weight=1)
     text_editor = Text()
     text_editor.grid(column=0, columnspan=3, row=0)
-    open_button = ttk.Button(text="Открыть файл", command=open_file)
-    open_button.grid(column=0, row=1, sticky=NSEW, padx=10)
+    open_button = ttk.Button(text="Открыть файлы", command=open_file)
+    open_button.grid(column=0, row=1, sticky=NSEW, padx=5)
     # with open('sheet_list.txt', 'w+', encoding='utf-8') as file:
     #     path_list = file.readlines()
-    go_button = ttk.Button(text="process", command=go_process)
+    go_button = ttk.Button(text="Старт", command=go_process)
     go_button.grid(column=1, row=1, sticky=NSEW, padx=10)
 
-    save_button = ttk.Button(text="Сохранить файл", command=save_file)
+    save_button = ttk.Button(text="Папка сохранения", command=save_file)
     save_button.grid(column=2, row=1, sticky=NSEW, padx=10)
 
-    for each in range(13):
-        value_var = IntVar(value=each)
-    ttk.Progressbar(orient="horizontal", length=300, value=10).grid(column=0, row=2)
+    # ttk.Progressbar(orient="horizontal", length=300, value=10).grid(column=0, row=2)
 
     root.mainloop()
+    print('Процесс завершен!')
 
 
