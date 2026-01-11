@@ -19,23 +19,29 @@ def open_file():
  
 # сохраняем текст из текстового поля в файл
 def save_file():
-    filepath = filedialog.askdirectory()
-    with open('export_path.txt', 'w+', encoding='utf-8') as file:
-        file.write(filepath)
-    return filepath
+    export_path = filedialog.askdirectory()
+    if export_path:
+        with open('export_path.txt', 'w+', encoding='utf-8') as file:
+            file.write(export_path)
+        return export_path
     
 
-def go_process():    
-    with open('sheet_list.txt', 'r', encoding='utf-8') as file:
-        path_list = file.readlines()
-    print(path_list)
-    try:
-        product(path_list, './export')
-    except Exception as err:
-        print(err)
-        messagebox.showerror("Title", err)
-    messagebox.showinfo('Title', 'Процесс завершен')
-    # os.mkdir('export/dir')
+def go_process():
+    if not os.path.isfile('sheet_list.txt'):
+        messagebox.showinfo('Title', 'Выберите таблицы для парсинга')
+    elif not os.path.isfile('export_path.txt'):
+        messagebox.showinfo('Title', 'Выберите Путь сохранения')
+    else:
+        try:
+            with open('sheet_list.txt', 'r', encoding='utf-8') as sheet_list:
+                sheet_list = sheet_list.readlines()
+                product(sheet_list, './export')
+        except Exception as err:
+            print(err)
+            messagebox.showerror("Title", err)
+        messagebox.showinfo('Title', 'Процесс завершен')
+
+    
 
 if __name__ == "__main__":
     root = Tk()
@@ -49,15 +55,16 @@ if __name__ == "__main__":
     open_button.grid(column=0, row=1, sticky=NSEW, padx=5)
     # with open('sheet_list.txt', 'w+', encoding='utf-8') as file:
     #     path_list = file.readlines()
-    go_button = ttk.Button(text="Старт", command=go_process)
-    go_button.grid(column=1, row=1, sticky=NSEW, padx=10)
+    process_button = ttk.Button(text="Старт", command=go_process)
+    process_button.grid(column=1, row=1, sticky=NSEW, padx=10)
 
     save_button = ttk.Button(text="Папка сохранения", command=save_file)
     save_button.grid(column=2, row=1, sticky=NSEW, padx=10)
 
     # ttk.Progressbar(orient="horizontal", length=300, value=10).grid(column=0, row=2)
-
     root.mainloop()
     print('Процесс завершен!')
+    os.remove('sheet_list.txt') if os.path.isfile('sheet_list.txt') else 1
+    os.remove('export_path.txt') if os.path.isfile('export_path.txt') else 1
 
 
