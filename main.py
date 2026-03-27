@@ -118,11 +118,11 @@ def product(xlsx_files, export_dir):
                 result_count = result_count.text.strip().split('\n')[0]
                 result_count = re.sub('[^0-9]', ' ', result_count).strip().split()
                 result_count = int(result_count[-1])
+                card_list = []
                 print('result_count -', result_count)
                 if result_count > 0:
                     cards = soup.find(class_='EXLResultsTable')
                     cards = cards.find_all(class_=re.compile('EXLResultMediaTYPE'))
-                    card_list = []
                     for each_card in cards:
                         link = each_card.find(class_='EXLResultTitle')
                         name = link.find('a').text
