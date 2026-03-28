@@ -15,6 +15,4 @@ llama-cli/
 output/
 sheet_dir/
 upscale/
-*.png
-*.jpg
 *.jpeg
