@@ -9,7 +9,6 @@ build
 export_path.txt
 sheet_list.txt
 __pycache__
-img/
 export/
 llama-b8117/
 llama-cli/
