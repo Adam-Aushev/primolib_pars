@@ -12,8 +12,7 @@ venv\Scripts\activate.bat
 source venv/Scripts/activate```
 
 Быстрый статрт
-```
-git clone https://github.com/Adam-Aushev/primolib_pars.git
+```git clone https://github.com/Adam-Aushev/primolib_pars.git
 cd primolib_pars
 python GUI.py```
 
