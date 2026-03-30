@@ -5,14 +5,15 @@
 - Затем можно будет нажать на кнопку "Парсинг" чтобы найти по этим данным rusmarc файлы на сайте Primolib
 
 рекомендую создать изолированную среду питона:
+
+Быстрый статрт
 ```python -m venv venv
 # Запуск среды для Windows
 venv\Scripts\activate.bat
 #Для Windows с оболочкой bash
-source venv/Scripts/activate```
-
-Быстрый статрт
-```git clone https://github.com/Adam-Aushev/primolib_pars.git
+source venv/Scripts/activate
+# Скачайте репозиторий, зацдите в папку, и запустите GUI.py, или можете запускать с файла run.bat
+git clone https://github.com/Adam-Aushev/primolib_pars.git
 cd primolib_pars
 python GUI.py```
 
