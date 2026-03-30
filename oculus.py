@@ -1,15 +1,20 @@
 import json
 from pathlib import Path
 import re
+import os
 
 
 
 def paddy(photo):
     from paddleocr import PaddleOCR
+    print(os.getcwd())
     ocr = PaddleOCR(
+        enable_mkldnn=False, # prevents MKLDNN/PIR crash
+        ocr_version="PP-OCRv5",
         use_doc_orientation_classify=False,
         use_doc_unwarping=False,
-        use_textline_orientation=False, lang='ru')
+        use_textline_orientation=False, 
+        lang='ru')
 
     # Run OCR inference on a sample image 
     result = ocr.predict(
@@ -25,7 +30,7 @@ def get_img_text(in_img):
     print('get_img_____', in_img)
     paddy(in_img)
     name = Path(in_img).stem
-    with open (f'output/{(name)}_res.json') as jfile:
+    with open (f'output/{(name)}_res.json', encoding='utf-8') as jfile:
         jfile = json.load(jfile)
     text_list = jfile['rec_texts']
     new_list = []

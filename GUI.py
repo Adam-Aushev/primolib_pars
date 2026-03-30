@@ -5,10 +5,18 @@ from main import product
 from tkinter import Text, Tk, NSEW
 from oculus import get_img_text
 from sheet_tools import write_data
+import sys
+from datetime import datetime
+
+def open_file(file_path):
+    if sys.platform == 'win32':
+        os.system(f'start {file_path}')
+    elif sys.platform == 'darwin':
+        os.system(f'open {file_path}')
 
 
 # открываем файл в текстовое поле
-def open_file():
+def choice_sheet():
     path_list = filedialog.askopenfilenames()
     if path_list:
         name_list = [f'{os.path.split(files)[1]}\n' for files in path_list]
@@ -35,8 +43,24 @@ def generate_sheet():
             sheet_path = write_data(sheet_name, sheet_data)
         with open('sheet_list.txt', 'w+', encoding='utf-8') as file:
             file.writelines(sheet_path)
-        os.system(f'open {sheet_path}')
+        open_file(sheet_path)
  
+def collect_marc():
+    path_list = filedialog.askopenfilenames()
+    marc_pathes = []
+    exp_path = os.path.split(path_list[0])[0].replace('/', '\\')
+    exp_path += "\\collect_"
+    exp_path += f'{datetime.now().day}_{datetime.now().hour}_{datetime.now().minute}_{datetime.now().second}'
+    exp_path += ".mcr"
+
+    for each in path_list:
+        each = each.replace('/', '\\')
+        marc_pathes.append(f'"{each}"')
+    marc_pathes = ' + '.join(marc_pathes)
+    code = f'copy /b {marc_pathes} {exp_path}'
+    print('code---------------', code)
+    os.system(code)
+
 
 # сохраняем текст из текстового поля в файл
 def save_file():
@@ -84,7 +108,9 @@ if __name__ == "__main__":
     text_editor.grid(column=0, columnspan=3, row=1)
     open_button = ttk.Button(text="Сгенерировать из картинки", command=generate_sheet)
     open_button.grid(column=1, row=2, sticky=NSEW, padx=5)
-    open_button = ttk.Button(text="Выбрать таблицы", command=open_file)
+    open_button = ttk.Button(text="Объеденить Marc", command=collect_marc)
+    open_button.grid(column=2, row=2, sticky=NSEW, padx=5)
+    open_button = ttk.Button(text="Выбрать таблицы", command=choice_sheet)
     open_button.grid(column=0, row=3, sticky=NSEW, padx=5)
     # with open('sheet_list.txt', 'w+', encoding='utf-8') as file:
     #     path_list = file.readlines()
