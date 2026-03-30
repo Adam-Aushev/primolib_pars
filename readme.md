@@ -18,3 +18,9 @@ cd primolib_pars
 python GUI.py```
 
 - если не нашел по ключевым словам ничего, сначала скрипт удаляет все после фамилии автора, типа из "Иванов Г. Ю." в "Иванов", дальше, если все равно не нашел ничего, скрипт удаляет по одному слову с конца из заглавья пока не найдет хоть что то, если и тогда не найдет, считается не найденым, и поле статуса остается пустым
+
+<picture>
+ <source media="(prefers-color-scheme: dark)" srcset="GUI_interface.png">
+ <source media="(prefers-color-scheme: light)" srcset="GUI_interface.png">
+ <img alt="YOUR-ALT-TEXT" src="GUI_interface.png">
+</picture>
